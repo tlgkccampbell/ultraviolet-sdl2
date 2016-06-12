@@ -238,6 +238,24 @@ SDL_InitSubSystem(Uint32 flags)
     return (0);
 }
 
+int(*SDL_UV_MainProc)();
+
+void
+SDL_UV_SetMainProc(int(*proc)())
+{
+	SDL_UV_MainProc = proc;
+}
+
+int 
+SDL_UV_RunMainProc()
+{
+	if (SDL_UV_MainProc)
+	{
+		return SDL_UV_MainProc();
+	}
+	return 1;
+}
+
 int
 SDL_Init(Uint32 flags)
 {
