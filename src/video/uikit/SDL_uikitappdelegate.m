@@ -23,6 +23,7 @@
 #if SDL_VIDEO_DRIVER_UIKIT
 
 #include "../SDL_sysvideo.h"
+#include "SDL.h"
 #include "SDL_assert.h"
 #include "SDL_hints.h"
 #include "SDL_system.h"
@@ -41,33 +42,6 @@
 static int forward_argc;
 static char **forward_argv;
 static int exit_status;
-
-int main(int argc, char **argv)
-{
-    int i;
-
-    /* store arguments */
-    forward_argc = argc;
-    forward_argv = (char **)malloc((argc+1) * sizeof(char *));
-    for (i = 0; i < argc; i++) {
-        forward_argv[i] = malloc( (strlen(argv[i])+1) * sizeof(char));
-        strcpy(forward_argv[i], argv[i]);
-    }
-    forward_argv[i] = NULL;
-
-    /* Give over control to run loop, SDLUIKitDelegate will handle most things from here */
-    @autoreleasepool {
-        UIApplicationMain(argc, argv, nil, [SDLUIKitDelegate getAppDelegateClassName]);
-    }
-
-    /* free the memory we used to hold copies of argc and argv */
-    for (i = 0; i < forward_argc; i++) {
-        free(forward_argv[i]);
-    }
-    free(forward_argv);
-
-    return exit_status;
-}
 
 static void
 SDL_IdleTimerDisabledChanged(void *userdata, const char *name, const char *oldValue, const char *hint)
@@ -344,7 +318,7 @@ SDL_LoadLaunchImageNamed(NSString *name, int screenh)
 
     /* run the user's application, passing argc and argv */
     SDL_iPhoneSetEventPump(SDL_TRUE);
-    exit_status = SDL_main(forward_argc, forward_argv);
+    exit_status = SDL_UV_RunMainProc();
     SDL_iPhoneSetEventPump(SDL_FALSE);
 
     if (launchWindow) {
