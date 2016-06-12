@@ -87,6 +87,17 @@ extern "C" {
 /* @} */
 
 /**
+ * This function is used by the Ultraviolet Framework to provide a function pointer to a
+ * managed delegate which is invoked in place of the traditional SDL_main function.
+ */
+extern DECLSPEC void SDL_UV_SetMainProc(int(*proc)());
+
+/**
+ * This function invokes the Ultraviolet Framework's main method.
+ */
+extern DECLSPEC int SDL_UV_RunMainProc();
+
+/**
  *  This function initializes  the subsystems specified by \c flags
  */
 extern DECLSPEC int SDLCALL SDL_Init(Uint32 flags);

@@ -64,7 +64,7 @@ JNIEXPORT int JNICALL Java_org_libsdl_app_SDLActivity_nativeInit(JNIEnv* env, jc
 
     /* Run the application. */
 
-    status = SDL_main(argc, argv);
+    status = SDL_UV_RunMainProc(argc, argv);
 
     /* Release the arguments. */
 
