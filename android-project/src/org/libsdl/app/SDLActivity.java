@@ -58,7 +58,7 @@ public class SDLActivity extends Activity {
     protected static boolean mScreenKeyboardShown;
     protected static ViewGroup mLayout;
     protected static SDLClipboardHandler mClipboardHandler;
-
+    protected static int mCurrentInputType = android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
 
     // This is what SDL runs in. It invokes SDL_main(), eventually
     protected static Thread mSDLThread;
@@ -101,7 +101,7 @@ public class SDLActivity extends Activity {
             // "SDL2_mixer",
             // "SDL2_net",
             // "SDL2_ttf",
-            "main"
+            // "main"
         };
     }
 
@@ -999,6 +999,11 @@ public class SDLActivity extends Activity {
         mClipboardHandler.clipboardSetText(string);
     }
 
+    /**
+     * This method is implemented in UltravioletActivity and
+     * is responsible for running the game's main loop.
+     */
+    protected void onUltravioletRun() {}
 }
 
 /**
@@ -1007,13 +1012,8 @@ public class SDLActivity extends Activity {
 class SDLMain implements Runnable {
     @Override
     public void run() {
-        // Runs SDL_main()
-        String library = SDLActivity.mSingleton.getMainSharedObject();
-        String function = SDLActivity.mSingleton.getMainFunction();
-        String[] arguments = SDLActivity.mSingleton.getArguments();
-
-        Log.v("SDL", "Running main function " + function + " from library " + library);
-        SDLActivity.nativeRunMain(library, function, arguments);
+        Log.v("SDL", "Running Ultraviolet main function");
+        SDLActivity.mSingleton.onUltravioletRun();
 
         Log.v("SDL", "Finished main function");
     }
@@ -1441,7 +1441,7 @@ class DummyEdit extends View implements View.OnKeyListener {
     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
         ic = new SDLInputConnection(this, true);
 
-        outAttrs.inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+        outAttrs.inputType = SDLActivity.mCurrentInputType;
         outAttrs.imeOptions = EditorInfo.IME_FLAG_NO_EXTRACT_UI
                 | EditorInfo.IME_FLAG_NO_FULLSCREEN /* API 11 */;
 
