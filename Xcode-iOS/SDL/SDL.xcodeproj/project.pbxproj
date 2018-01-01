@@ -90,6 +90,7 @@
 		56F9D5601DF73BA400C15B5D /* SDL_dataqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 566726431DF72CF5001DD3DB /* SDL_dataqueue.c */; };
 		93CB792313FC5E5200BD3E05 /* SDL_uikitviewcontroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 93CB792213FC5E5200BD3E05 /* SDL_uikitviewcontroller.h */; };
 		93CB792613FC5F5300BD3E05 /* SDL_uikitviewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CB792513FC5F5300BD3E05 /* SDL_uikitviewcontroller.m */; };
+		9E4553731FFAE02A006FECBD /* SDL_dynamic_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 9E4553721FFAE02A006FECBD /* SDL_dynamic_main.c */; };
 		A7A9EEA91F702631002A5589 /* SDL_steamcontroller.c in Sources */ = {isa = PBXBuildFile; fileRef = A7A9EEA71F702631002A5589 /* SDL_steamcontroller.c */; };
 		A7A9EEAA1F702631002A5589 /* SDL_steamcontroller.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A9EEA81F702631002A5589 /* SDL_steamcontroller.h */; };
 		AA0AD06216647BBB00CE5896 /* SDL_gamecontroller.c in Sources */ = {isa = PBXBuildFile; fileRef = AA0AD06116647BBB00CE5896 /* SDL_gamecontroller.c */; };
@@ -395,6 +396,7 @@
 		56ED04E2118A8EFD00A56AA6 /* SDL_syspower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDL_syspower.m; path = ../../src/power/uikit/SDL_syspower.m; sourceTree = SOURCE_ROOT; };
 		93CB792213FC5E5200BD3E05 /* SDL_uikitviewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitviewcontroller.h; sourceTree = "<group>"; };
 		93CB792513FC5F5300BD3E05 /* SDL_uikitviewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitviewcontroller.m; sourceTree = "<group>"; };
+		9E4553721FFAE02A006FECBD /* SDL_dynamic_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_dynamic_main.c; sourceTree = "<group>"; };
 		A7A9EEA71F702631002A5589 /* SDL_steamcontroller.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_steamcontroller.c; sourceTree = "<group>"; };
 		A7A9EEA81F702631002A5589 /* SDL_steamcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_steamcontroller.h; sourceTree = "<group>"; };
 		AA0AD06116647BBB00CE5896 /* SDL_gamecontroller.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_gamecontroller.c; sourceTree = "<group>"; };
@@ -729,6 +731,23 @@
 			name = uikit;
 			sourceTree = "<group>";
 		};
+		9E4553711FFAE01A006FECBD /* dynamic */ = {
+			isa = PBXGroup;
+			children = (
+				9E4553721FFAE02A006FECBD /* SDL_dynamic_main.c */,
+			);
+			path = dynamic;
+			sourceTree = "<group>";
+		};
+		9ECDA2901FFAC0B200A73790 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				9E4553711FFAE01A006FECBD /* dynamic */,
+			);
+			name = main;
+			path = ../../src/main;
+			sourceTree = "<group>";
+		};
 		A7A9EEA61F702607002A5589 /* steam */ = {
 			isa = PBXGroup;
 			children = (
@@ -893,6 +912,7 @@
 		FD99B8BD0DD52E6D00FB1D6B /* Library Source */ = {
 			isa = PBXGroup;
 			children = (
+				9ECDA2901FFAC0B200A73790 /* main */,
 				04B2ECEF1025CEB900F9BC5F /* atomic */,
 				FD99B8FB0DD52EDC00FB1D6B /* audio */,
 				FD99B98A0DD52EDC00FB1D6B /* cpuinfo */,
@@ -1472,6 +1492,7 @@
 				FD689F250E26E5D900F90B21 /* SDL_uikitwindow.m in Sources */,
 				FD689F270E26E5D900F90B21 /* SDL_uikitopenglview.m in Sources */,
 				FD689FCE0E26E9D400F90B21 /* SDL_uikitappdelegate.m in Sources */,
+				9E4553731FFAE02A006FECBD /* SDL_dynamic_main.c in Sources */,
 				FD8BD8250E27E25900B52CD5 /* SDL_sysloadso.c in Sources */,
 				047677BB0EA76A31008ABAF1 /* SDL_syshaptic.c in Sources */,
 				047677BC0EA76A31008ABAF1 /* SDL_haptic.c in Sources */,

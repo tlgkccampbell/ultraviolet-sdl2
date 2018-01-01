@@ -42,6 +42,11 @@ static int forward_argc;
 static char **forward_argv;
 static int exit_status;
 
+/*
+ * Xamarin already defines main(), so we have to get rid of this one
+ * or else we'll get duplicate symbol errors during linking.
+ */
+#ifndef XAMARIN
 int main(int argc, char **argv)
 {
     int i;
@@ -68,6 +73,7 @@ int main(int argc, char **argv)
 
     return exit_status;
 }
+#endif
 
 static void SDLCALL
 SDL_IdleTimerDisabledChanged(void *userdata, const char *name, const char *oldValue, const char *hint)

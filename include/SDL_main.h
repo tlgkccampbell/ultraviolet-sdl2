@@ -149,8 +149,45 @@ extern DECLSPEC void SDLCALL SDL_UnregisterApp(void);
 extern DECLSPEC int SDLCALL SDL_WinRTRunApp(int (*mainFunction)(int, char **), void * reserved);
 
 #endif /* __WINRT__ */
+    
+/**
+ *  When running under Xamarin iOS, we need a way to define SDL_main() from our C# code.
+ *  SDL_DYNAMIC_MAIN, when defined, implements a set of functions and a simple shim which
+ *  allow the main function to be injected via a function pointer using P/Invoke. See
+ *  src/main/dynamic/SDL_dynamic_main.c for more details.
+ */
+#if defined(XAMARIN) && defined(__IPHONEOS__)
+#define SDL_DYNAMIC_MAIN
+#endif
 
+#ifdef SDL_DYNAMIC_MAIN
+    
+typedef int (SDLCALL * SDL_DynamicMain) (void);
+    
+/**
+ *  \brief Specifies the function pointer which is invoked by the dynamic SDL_main shim.
+ *
+ *  \param proc A function pointer which implements SDL_main.
+ *  \return The exit code which should be returned by SDL_main.
+ */
+extern DECLSPEC void SDLCALL SDL_SetDynamicMain(SDL_DynamicMain proc);
 
+/**
+ *  \brief Gets the function pointer which is invoked by the dynamic SDL_main shim.
+ *
+ *  \return A function pointer which implements SDL_main.
+ */
+extern DECLSPEC SDL_DynamicMain SDLCALL SDL_GetDynamicMain(void);
+
+/**
+ *  \brief Executes the function pointer which was specified by SDL_SetDynamicMain().
+ *
+ *  \return The exit code returned by the dynamic main function, or 1 if no dynamic main function has been specified.
+ */
+extern DECLSPEC int SDL_RunDynamicMain(void);
+    
+#endif
+    
 #ifdef __cplusplus
 }
 #endif
