@@ -1,0 +1,9 @@
+android-project/bin/
+android-project/gen/
+android-project/jni/SDL
+android-project/obj/
+build/
+android-xamarin-bindings/Org.Libsdl.App/Jars/org.libsdl.app.jar
+.DS_Store
+project.xcworkspace/
+xcuserdata/
